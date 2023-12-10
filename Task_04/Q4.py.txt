@@ -1,0 +1,23 @@
+import requests
+import pandas as pd
+
+
+url = "https://geodb-cities.p.rapidapi.com/v1/geo/countries/NZ/places"
+
+
+headers = {
+    "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
+    "X-RapidAPI-Key": "71d1e8d213mshba3e78f9199a98ep10c589jsn31e32cc2ecb6",
+}
+
+
+response = requests.get(url, headers=headers)
+data = response.json()
+
+
+places = data.get("data", [])
+
+df = pd.DataFrame(places, columns=["id", "name", "type", "regionCode"])
+
+
+print(df)
